@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import util.DB_Connection;
 
@@ -13,10 +16,14 @@ public class User {
 	{
 		String output = "";
 		
+	    Calendar calobj = Calendar.getInstance();
+	    DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		
 		try
 		{	
 			DB_Connection obj_DB_Connection= new DB_Connection();
 			Connection con = obj_DB_Connection.connect();
+			
 			if (con==null)
 			{
 				return "Error while connecting to the database  for inserting.!";
@@ -37,7 +44,7 @@ public class User {
 			preparedStmt.setString(8, lname);
 			preparedStmt.setString(9, address);
 			preparedStmt.setString(10, bod);
-			preparedStmt.setInt(11, 0);
+			preparedStmt.setString(11, (df.format(calobj.getTime())));
 			
 			//execute the statement
 			preparedStmt.execute();
@@ -136,7 +143,7 @@ public class User {
 	}
 	
 	
-	public String updateItem(String ID, String code, String name, String price, String desc)
+	public String updateUser(String id, String code, String username, String pwd, String email, String role, String fname, String lname, String address, String bod)
 	{
 		String output = "";
 		
@@ -151,16 +158,21 @@ public class User {
 			}
 			
 			// create a prepared statement
-			String query = "UPDATE itemsk SET itemCode=?, itemName=?, itemPrice=?, itemDesc=? WHERE itemID=?";
+			String query = "UPDATE users SET userCode=?, username=?, userPwd=?, userEmail=?, userRole=?, userFname=?, userLname=?, userAddress=?, userBod=? WHERE userID=?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			// binding values
 			preparedStmt.setString(1, code);
-			preparedStmt.setString(2, name);
-			preparedStmt.setDouble(3, Double.parseDouble(price));
-			preparedStmt.setString(4, desc);
-			preparedStmt.setInt(5, Integer.parseInt(ID));
+			preparedStmt.setString(2, username);
+			preparedStmt.setString(3, pwd);
+			preparedStmt.setString(4, email);
+			preparedStmt.setString(5, role);
+			preparedStmt.setString(6, fname);
+			preparedStmt.setString(7, lname);
+			preparedStmt.setString(8, address);
+			preparedStmt.setString(9, bod);
+			preparedStmt.setInt(10, Integer.parseInt(id));
 			
 			// execute the statement
 			preparedStmt.execute();
@@ -171,7 +183,7 @@ public class User {
 		}
 		catch (Exception e)
 		{
-			output = "Error while updating the item.";
+			output = "Error while updating the User.";
 			System.err.println(e.getMessage());
 		}
 		
@@ -179,7 +191,7 @@ public class User {
 	}
 	
 	
-	public String deleteItem(String itemID)
+	public String deleteUser(String userID)
 	{
 		String output = "";
 		
@@ -192,12 +204,12 @@ public class User {
 			}
 			
 			//Create a prepared statement
-			String query = "delete from itemsk where itemID=?";
+			String query = "delete from users where userID=?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			//binding the statement
-			preparedStmt.setInt(1, Integer.parseInt(itemID));
+			preparedStmt.setInt(1, Integer.parseInt(userID));
 			
 			//execute the statement
 			preparedStmt.execute();
