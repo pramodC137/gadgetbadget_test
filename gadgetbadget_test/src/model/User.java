@@ -26,7 +26,7 @@ public class User {
 			
 			if (con==null)
 			{
-				return "Error while connecting to the database  for inserting.!";
+				return "Error while connecting to users database for inserting.!";
 			}
 			
 			// Create a prepared statement 'itemID', ?,
@@ -50,7 +50,7 @@ public class User {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Inserted Successfully";
+			output = "User Inserted Successfully";
 		}
 		catch(Exception e)
 		{
@@ -72,7 +72,7 @@ public class User {
 			Connection con = obj_DB_Connection.connect();
 			if(con == null)
 			{
-				return "Error while connecting to the database for reading.";
+				return "Error while connecting to users database for reading.";
 			}
 			
 			// Prepare the html table to be displayed
