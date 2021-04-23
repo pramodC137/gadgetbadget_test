@@ -75,6 +75,8 @@ public class User {
 				return "Error while connecting to users database for reading.";
 			}
 			
+			output = "All Users Details";
+			
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>User Code</th>"
 				+ "<th>username</th>"
@@ -135,7 +137,7 @@ public class User {
 		}
 		catch(Exception e)
 		{
-			output = "Error while reading the items.";
+			output = "Error while reading the users.";
 			System.err.println(e.getMessage());
 		}
 		
@@ -154,7 +156,7 @@ public class User {
 			
 			if(con == null)
 			{
-				return "Error while connecting to the database for updating.";
+				return "Error while connecting to users database for updating.";
 			}
 			
 			// create a prepared statement
@@ -178,7 +180,7 @@ public class User {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Updated successfully ";
+			output = " User Updated successfully ";
 			
 		}
 		catch (Exception e)
@@ -200,7 +202,7 @@ public class User {
 			DB_Connection obj_DB_Connection= new DB_Connection();
 			Connection con = obj_DB_Connection.connect();
 			if(con == null) {
-				return"Error while connecting to the databae for deleting.";
+				return"Error while connecting to users databae for deleting.";
 			}
 			
 			//Create a prepared statement
@@ -215,11 +217,11 @@ public class User {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Delete Successfully";	
+			output = " User Deleted Successfully";	
 		}
 		catch (Exception e)
 		{
-			output = "Error while deleting the item.";
+			output = "Error while deleting the user.";
 			System.err.println(e.getMessage());
 		}
 	
