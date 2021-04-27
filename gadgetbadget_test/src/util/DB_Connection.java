@@ -14,7 +14,7 @@ public class DB_Connection {
 				// Provide the correct details: DBServer/DBName, username, password
 				
 				Class.forName("com.mysql.jdbc.Driver");
-				con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget","root","");
+				con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/it18199086","root","");
 				
 				//For testing
 				System.out.print("Successfully Connected");
